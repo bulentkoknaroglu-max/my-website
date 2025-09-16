@@ -526,5 +526,45 @@
 
         // PWA kodları...
     </script>
+    <script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault(); // sayfanın yenilenmesini engeller
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const role = document.querySelector(".login-tab.active").dataset.role;
+
+    // Demo kullanıcı doğrulaması
+    if(role === "student" && username === "student" && password === "123"){
+        alert("Öğrenci girişi başarılı!");
+        // login ekranını gizle
+        document.getElementById("loginSection").style.display = "none";
+        // Öğrenci panelini göster (panel id'si olmalı)
+        // document.getElementById("studentDashboard").style.display = "block";
+    } else if(role === "teacher" && username === "teacher" && password === "123"){
+        alert("Öğretmen girişi başarılı!");
+        document.getElementById("loginSection").style.display = "none";
+        // document.getElementById("teacherDashboard").style.display = "block";
+    } else if(role === "parent" && username === "parent" && password === "123"){
+        alert("Veli girişi başarılı!");
+        document.getElementById("loginSection").style.display = "none";
+        // document.getElementById("parentDashboard").style.display = "block";
+    } else {
+        alert("Kullanıcı adı veya şifre hatalı.");
+    }
+});
+
+// Login tab değişimi
+const tabs = document.querySelectorAll(".login-tab");
+tabs.forEach(tab => {
+    tab.addEventListener("click", function(){
+        tabs.forEach(t => t.classList.remove("active"));
+        this.classList.add("active");
+
+        // Sınıf seçimi sadece öğrenci için göster
+        document.getElementById("classGroup").style.display = this.dataset.role === "student" ? "block" : "none";
+    });
+});
+</script>
 </body>
 </html>
