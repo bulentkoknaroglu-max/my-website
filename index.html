@@ -595,5 +595,25 @@ if ('serviceWorker' in navigator) {
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
 </script>
+    <script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const email = document.getElementById("username").value; // kullanıcı adı yerine email
+    const password = document.getElementById("password").value;
+
+    auth.signInWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        alert("Giriş başarılı! " + userCredential.user.email);
+        document.getElementById("loginSection").style.display = "none";
+
+        // Burada role'lere göre yönlendirme yapabilirsin
+        // window.location.href = "dashboard.html";
+      })
+      .catch(error => {
+        alert("Hata: " + error.message);
+      });
+});
+</script>
 </body>
 </html>
