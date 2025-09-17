@@ -615,5 +615,15 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
       });
 });
 </script>
+    <script>
+function logout(){
+  auth.signOut().then(() => {
+    // Kullanıcı çıkış yaptıktan sonra login sayfasına yönlendirme
+    window.location.href = "login.html";
+  }).catch(error => {
+    alert("Çıkış hatası: " + error.message);
+  });
+}
+</script>
 </body>
 </html>
